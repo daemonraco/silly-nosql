@@ -1,6 +1,6 @@
 {
   "name": "silly-nosql",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "NoSQL database emulated with files. For small tests, not real stuff, of course, c'mon, don't be silly.",
   "main": "lib/silly",
   "types": "lib/silly",
