@@ -30,6 +30,9 @@ export class SillyTable {
     }
     //
     // Public methods.
+    public all(): any[] {
+        return JSON.parse(JSON.stringify(this._data));
+    }
     public delete(id: number): boolean {
         let out = false;
 
@@ -45,9 +48,9 @@ export class SillyTable {
     }
     public getById(id: number): any {
         const result = this.search(`$..[?(@._id=='${id}')]`);
-        return result.length === 1 ? result[0] : null;
+        return result.length === 1 ? JSON.parse(JSON.stringify(result[0])) : null;
     }
-    public insert(data: { [name: string]: any }): boolean {
+    public insert(data: { [name: string]: any }): any {
         if (!data._id) {
             data._id = this._sequence.next();
         } else {
@@ -59,17 +62,18 @@ export class SillyTable {
         this._data.push(data);
         this.save();
 
-        return true;
+        return data;
+    }
+    public name(): string {
+        return this._name;
     }
     public save(): any {
         return fs.writeFileSync(this._path, JSON.stringify(this._data, null, this._padding));
     }
     public search(query: string): any {
-        return jsonpath({ path: query, json: this._data });
+        return JSON.parse(JSON.stringify(jsonpath({ path: query, json: this._data })));
     }
-    public update(data: { [name: string]: any }): boolean {
-        let out = false;
-
+    public update(data: { [name: string]: any }): any {
         if (!data._id) {
             throw `Updating object has no ID.`;
         }
@@ -79,11 +83,9 @@ export class SillyTable {
             const pos = this._data.indexOf(item);
             this._data[pos] = data;
             this.save();
-
-            out = true;
         }
 
-        return out;
+        return data;
     }
     public truncate(): void {
         this._data = [];
@@ -91,10 +93,30 @@ export class SillyTable {
 
         this._sequence.truncate();
     }
+    public where(query: any): any[] {
+        let out: any[] = [];
+
+        let firstTime = true;
+        for (let key in query) {
+            const partial = jsonpath({ path: `$..[?(@.${key}=='${query[key]}')]`, json: this._data });
+
+            if (firstTime) {
+                out = partial;
+            } else {
+                out = out.filter(entry => {
+                    return partial.indexOf(entry) !== -1;
+                });
+            }
+
+            firstTime = false;
+        }
+
+        return JSON.parse(JSON.stringify(out));
+    }
     //
     // Protected methods.
     protected load(): void {
-        this._path = path.join(this._paths.tables, `${this._name}.tab`);
+        this._path = SillyTable.buildTableName(this._name, this._paths.tables);
 
         if (fs.existsSync(this._path)) {
             const raw = fs.readFileSync(this._path);
@@ -104,5 +126,15 @@ export class SillyTable {
         }
 
         this._sequence = this._connection.sequence(this._name);
+    }
+    //
+    // Public class methods.
+    public static exists(name: string, directory: string): boolean {
+        return fs.existsSync(SillyTable.buildTableName(name, directory));
+    }
+    //
+    // Protected class methods.
+    protected static buildTableName(name: string, directory: string): string {
+        return path.join(directory, `${name}.tab`);
     }
 }

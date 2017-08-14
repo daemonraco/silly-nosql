@@ -30,6 +30,7 @@ export declare class SillyConnection {
     };
     sequence(name: string): SillySequence;
     table(name: string): SillyTable;
+    tableExists(name: string): boolean;
     protected createManifest(): void;
     protected load(): void;
     protected loadOptions(options?: any): void;

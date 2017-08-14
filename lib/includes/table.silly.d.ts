@@ -12,16 +12,21 @@ export declare class SillyTable {
     };
     protected _sequence: SillySequence;
     constructor(name: string, connection: SillyConnection);
+    all(): any[];
     delete(id: number): boolean;
     getById(id: number): any;
     insert(data: {
         [name: string]: any;
-    }): boolean;
+    }): any;
+    name(): string;
     save(): any;
     search(query: string): any;
     update(data: {
         [name: string]: any;
-    }): boolean;
+    }): any;
     truncate(): void;
+    where(query: any): any[];
     protected load(): void;
+    static exists(name: string, directory: string): boolean;
+    protected static buildTableName(name: string, directory: string): string;
 }

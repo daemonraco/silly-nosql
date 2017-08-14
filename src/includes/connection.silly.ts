@@ -72,6 +72,9 @@ export class SillyConnection {
 
         return this._tables[name];
     }
+    public tableExists(name: string): boolean {
+        return SillyTable.exists(name, this._paths.tables);
+    }
     //
     // Protected methods.
     protected createManifest(): void {
