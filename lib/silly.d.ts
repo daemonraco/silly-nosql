@@ -5,6 +5,7 @@ import { ExpressAdapter } from './includes/adapters/express.adapter';
 declare const _default: {
     manager: SillyNoSQL;
     types: {
+        SillyNoSQL: typeof SillyNoSQL;
         SillyConnection: typeof SillyConnection;
         SillyTable: typeof SillyTable;
     };

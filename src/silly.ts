@@ -6,6 +6,6 @@ import { ExpressAdapter } from './includes/adapters/express.adapter';
 
 export = {
     manager: SillyNoSQL.instance(),
-    types: { SillyConnection, SillyTable },
+    types: { SillyNoSQL, SillyConnection, SillyTable },
     adapters: { ExpressAdapter }
 };

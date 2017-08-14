@@ -1,13 +1,14 @@
 {
   "name": "silly-nosql",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "NoSQL database emulated with files. For small tests, not real stuff, of course, c'mon, don't be silly.",
   "main": "lib/silly",
   "types": "lib/silly",
   "scripts": {
     "start": "npm run build:live",
     "build": "./node_modules/.bin/tsc",
-    "build:live": "./node_modules/.bin/tsc -w"
+    "build:live": "./node_modules/.bin/tsc -w",
+    "test": "rm -fr ./test/.tmpdb;mkdir -p ./test/.tmpdb;./node_modules/mocha/bin/mocha"
   },
   "keywords": [
     "nosql",
@@ -27,6 +28,8 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^8.0.12",
+    "chai": "^4.1.1",
+    "mocha": "^3.5.0",
     "typescript": "^2.4.1"
   },
   "dependencies": {
