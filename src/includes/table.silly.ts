@@ -31,7 +31,7 @@ export class SillyTable {
     //
     // Public methods.
     public all(): any[] {
-        return JSON.parse(JSON.stringify(this._data));
+        return this._data;
     }
     public delete(id: number): boolean {
         let out = false;
@@ -46,9 +46,14 @@ export class SillyTable {
 
         return out;
     }
+    public drop(): any {
+        this._data = [];
+        fs.unlinkSync(this._path);
+        return !fs.existsSync(this._path);
+    }
     public getById(id: number): any {
         const result = this.search(`$..[?(@._id=='${id}')]`);
-        return result.length === 1 ? JSON.parse(JSON.stringify(result[0])) : null;
+        return result.length === 1 ? result[0] : null;
     }
     public insert(data: { [name: string]: any }): any {
         if (!data._id) {
@@ -71,7 +76,7 @@ export class SillyTable {
         return fs.writeFileSync(this._path, JSON.stringify(this._data, null, this._padding));
     }
     public search(query: string): any {
-        return JSON.parse(JSON.stringify(jsonpath({ path: query, json: this._data })));
+        return jsonpath({ path: query, json: this._data });
     }
     public update(data: { [name: string]: any }): any {
         if (!data._id) {
@@ -111,7 +116,7 @@ export class SillyTable {
             firstTime = false;
         }
 
-        return JSON.parse(JSON.stringify(out));
+        return out;
     }
     //
     // Protected methods.

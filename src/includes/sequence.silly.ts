@@ -23,6 +23,11 @@ export class SillySequence {
     }
     //
     // Public methods.
+    public drop(): any {
+        this._value = 0;
+        fs.unlinkSync(this._path);
+        return !fs.existsSync(this._path);
+    }
     public next(): number {
         this._value++;
         this.save();

@@ -14,6 +14,7 @@ export declare class SillyTable {
     constructor(name: string, connection: SillyConnection);
     all(): any[];
     delete(id: number): boolean;
+    drop(): any;
     getById(id: number): any;
     insert(data: {
         [name: string]: any;

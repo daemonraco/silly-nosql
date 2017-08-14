@@ -8,6 +8,7 @@ export declare class SillySequence {
     };
     protected _value: number;
     constructor(name: string, connection: SillyConnection);
+    drop(): any;
     next(): number;
     truncate(): void;
     protected load(): void;
