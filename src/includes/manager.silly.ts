@@ -9,13 +9,13 @@ export class SillyNoSQL {
     protected connections: { [name: string]: SillyConnection } = {};
     //
     // Constructor.
-    constructor() {
+    protected constructor() {
     }
     //
     // Public methods.
     public connect(dbpath: string, options: any = {}) {
         if (!this.connections[dbpath]) {
-            this.connections[dbpath] = new SillyConnection(dbpath,options);
+            this.connections[dbpath] = new SillyConnection(dbpath, options);
         }
 
         return this.connections[dbpath];

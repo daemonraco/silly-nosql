@@ -23,7 +23,7 @@ export class SillySequence {
     }
     //
     // Public methods.
-    public drop(): any {
+    public drop(): boolean {
         this._value = 0;
         fs.unlinkSync(this._path);
         return !fs.existsSync(this._path);

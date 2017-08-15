@@ -4,7 +4,7 @@ export declare class SillyNoSQL {
     protected connections: {
         [name: string]: SillyConnection;
     };
-    constructor();
+    protected constructor();
     connect(dbpath: string, options?: any): SillyConnection;
     static instance(): SillyNoSQL;
 }

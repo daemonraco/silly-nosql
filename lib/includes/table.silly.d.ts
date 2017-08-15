@@ -14,13 +14,13 @@ export declare class SillyTable {
     constructor(name: string, connection: SillyConnection);
     all(): any[];
     delete(id: number): boolean;
-    drop(): any;
+    drop(): boolean;
     getById(id: number): any;
     insert(data: {
         [name: string]: any;
     }): any;
     name(): string;
-    save(): any;
+    save(): void;
     search(query: string): any;
     update(data: {
         [name: string]: any;

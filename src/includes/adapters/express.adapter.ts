@@ -4,7 +4,7 @@ export class ExpressAdapter {
     protected _table: SillyTable;
     protected _options: { [name: string]: any } = {};
 
-    constructor() {
+    protected constructor() {
     }
 
     public delete(req: any, res: any): void {
@@ -72,7 +72,7 @@ export class ExpressAdapter {
         res.json(result);
     }
 
-    public static adapat(app: any, table: SillyTable, options: { [name: string]: any } = {}) {
+    public static adapat(app: any, table: SillyTable, options: { [name: string]: any } = {}): void {
         const adapter = new ExpressAdapter();
 
         adapter._table = table;

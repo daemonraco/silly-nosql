@@ -46,7 +46,7 @@ export class SillyTable {
 
         return out;
     }
-    public drop(): any {
+    public drop(): boolean {
         this._data = [];
         fs.unlinkSync(this._path);
         return !fs.existsSync(this._path);
@@ -72,8 +72,8 @@ export class SillyTable {
     public name(): string {
         return this._name;
     }
-    public save(): any {
-        return fs.writeFileSync(this._path, JSON.stringify(this._data, null, this._padding));
+    public save(): void {
+        fs.writeFileSync(this._path, JSON.stringify(this._data, null, this._padding));
     }
     public search(query: string): any {
         return jsonpath({ path: query, json: this._data });

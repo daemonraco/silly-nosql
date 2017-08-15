@@ -4,7 +4,7 @@ export declare class ExpressAdapter {
     protected _options: {
         [name: string]: any;
     };
-    constructor();
+    protected constructor();
     delete(req: any, res: any): void;
     get(req: any, res: any): void;
     insert(req: any, res: any): void;
