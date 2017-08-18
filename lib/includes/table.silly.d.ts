@@ -22,11 +22,21 @@ export declare class SillyTable {
     name(): string;
     save(): void;
     search(query: string): any;
+    searchAndUpdate(query: string, data: {
+        [name: string]: any;
+    }): any;
     update(data: {
         [name: string]: any;
     }): any;
+    updateWhere(query: {
+        [name: string]: any;
+    }, data: {
+        [name: string]: any;
+    }): any;
     truncate(): void;
-    where(query: any): any[];
+    where(query: {
+        [name: string]: any;
+    }): any[];
     protected load(): void;
     static exists(name: string, directory: string): boolean;
     protected static buildTableName(name: string, directory: string): string;

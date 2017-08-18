@@ -78,6 +78,20 @@ export class SillyTable {
     public search(query: string): any {
         return jsonpath({ path: query, json: this._data });
     }
+    public searchAndUpdate(query: string, data: { [name: string]: any }): any {
+        const found = this.search(query);
+
+        if (typeof data._id !== 'undefined') {
+            delete data._id;
+        }
+
+        for (let k in found) {
+            found[k] = Object.assign(found[k], data);
+            this.update(found[k]);
+        }
+
+        return this.search(query);
+    }
     public update(data: { [name: string]: any }): any {
         if (!data._id) {
             throw `Updating object has no ID.`;
@@ -92,13 +106,27 @@ export class SillyTable {
 
         return data;
     }
+    public updateWhere(query: { [name: string]: any }, data: { [name: string]: any }): any {
+        const found = this.where(query);
+
+        if (typeof data._id !== 'undefined') {
+            delete data._id;
+        }
+
+        for (let k in found) {
+            found[k] = Object.assign(found[k], data);
+            this.update(found[k]);
+        }
+
+        return this.where(query);
+    }
     public truncate(): void {
         this._data = [];
         this.save();
 
         this._sequence.truncate();
     }
-    public where(query: any): any[] {
+    public where(query: { [name: string]: any }): any[] {
         let out: any[] = [];
 
         let firstTime = true;

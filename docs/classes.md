@@ -1,4 +1,4 @@
-# Objects and Methods (silly-nosql@0.0.5)
+# Objects and Methods (silly-nosql@0.0.6)
 
 ## Class `ExpressAdapter`
 * `adapat(app, table[, options])`<sup>class method</sup>: RESTful adapter for ExpressJS

@@ -1,8 +1,12 @@
-'use strict'
+'use strict';
 
+// ---------------------------------------------------------------------------- //
+// Dependences.
 const assert = require('chai').assert;
 const path = require('path');
 
+// ---------------------------------------------------------------------------- //
+// Testing.
 describe('silly-nosql: Connect', () => {
     const snsql = require('..');
     const dbPath = path.join(__dirname, '.tmpdb');

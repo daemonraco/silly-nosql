@@ -1,7 +1,11 @@
-'use strict'
+'use strict';
 
+// ---------------------------------------------------------------------------- //
+// Dependences.
 const assert = require('chai').assert;
 
+// ---------------------------------------------------------------------------- //
+// Testing.
 describe('silly-nosql: Require', () => {
     const snsql = require('..');
 
