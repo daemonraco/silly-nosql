@@ -1,3 +1,7 @@
+# __@DEPRECATED__
+This module won't get maintenance any more. It will remain here to provide it for those projects that use it, but that's all.
+As an alternative, we recommend to move to [__DocsOnFilesDB__](https://www.npmjs.com/package/dfdb)
+
 # Silly NoSQL (v0.0.6)
 NoSQL database emulated with files. For small tests, not real stuff, of course, c'mon, don't be silly.
 
